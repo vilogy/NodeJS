@@ -1,12 +1,22 @@
 const express = require('express');
 const app = express();
 
-app.get('/', function(req, res, next){
+
+
+app.set('port', 8080);
+
+app.get('/hello/:world', function(req, res, next){
     res.json({
-        'status' : 'Sukces!'
+        'hello' : req.params.world
     });
 });
 
-app.listen(8080, function () {
-    console.log('Listening');
+app.get('/port', function(req, res, next){
+    res.json({
+        'port' : app.get('port')
+    });
+});
+
+app.listen(app.get('port'), function () {
+    console.log(`Listening on ${ app.get('port') }`);
 })
